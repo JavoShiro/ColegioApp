@@ -1,0 +1,1 @@
+De momento solo funcionan algunos botones, El boton de alumno, profesor y apoderado son llevará todo al mismo iniciar sesión del profesor. Asique todo el apartado que esta presente es del profesor. Como agregar notas y agenda.
