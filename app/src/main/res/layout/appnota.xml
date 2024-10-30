@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/imgblack"
+    tools:context=".NotaActivity">
+
+    <TextView
+        android:id="@+id/tvNotas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/notas"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:id="@+id/llNotas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/btnRegistrarNota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/regNotas"
+        android:textSize="19sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnEliminarNota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/eliminarNotas"
+        android:textSize="19sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_red_light"/>
+    <Button
+        android:id="@+id/btnEditar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/editarbtn"
+        android:textSize="19sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@android:color/holo_green_dark"/>
+</LinearLayout>

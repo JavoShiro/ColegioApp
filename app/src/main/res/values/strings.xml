@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">appColegio</string>
+    <string name="txtBienvenida">Bienvenido!</string>
+    <string name="btprofessor">Profesor</string>
+    <string name="btalumno">Alumno</string>
+    <string name="btapoderado">Apoderado</string>
+    <string name="copyright">© 2024, Javier Ingnacio Vilches Rosales</string>
+    <string name="nombre">RUT o Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="btsesion">Iniciar Sesión</string>
+    <string name="btinicio">Iniciar Sesión</string>
+    <string name="ambiente_aprendizaje">Ambiente Aprendizaje</string>
+    <string name="notas">Notas</string>
+    <string name="leer_consultas">Leer Consultas</string>
+    <string name="agenda">Agenda</string>
+    <string name="agendatitle">Agenda</string>
+    <string name="agregarEvento">Agregar Evento</string>
+    <string name="titleBienvenido">Bienvenido</string>
+    <string name="notaBt">Notas</string>
+    <string name="ampren">Ambiente Aprendizaje</string>
+    <string name="consultas">Leer Consultas</string>
+    <string name="regNotas">Registrar Nota</string>
+    <string name="eliminarNotas">Eliminar Nota</string>
+    <string name="editarbtn">Editar Nota</string>
+    <string name="asistencia_alumnos">Asistencia Alumnos</string>
+</resources>

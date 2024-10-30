@@ -1,0 +1,47 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppColegio"
+        tools:targetApi="31">
+
+        <!-- Actividad principal de inicio -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Actividad de inicio de sesión -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+
+        <!-- Actividad principal del home -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true" />
+
+        <!-- Actividad para notas -->
+        <activity
+            android:name=".NotaActivity"
+            android:exported="true" />
+
+        <!-- Actividad para agenda -->
+        <activity
+            android:name=".AgendaActivity"
+            android:exported="true" /> <!-- Asegúrate de que esta línea esté incluida -->
+
+    </application>
+
+</manifest>
