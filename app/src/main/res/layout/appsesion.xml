@@ -1,54 +1,56 @@
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/loginLayout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/imgblack">
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:text="INICIAR SESIÓN"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:gravity="center"
-        android:padding="16dp"
-        android:background="@drawable/imgblack">
+        android:layout_marginBottom="40dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="INICIAR SESIÓN"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="40dp"
-            />
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/nombre"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:inputType="textEmailAddress"
+        android:autofillHints="emailAddress"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp" />
 
-        <EditText
-            android:id="@+id/etRutOrEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/nombre"
-            android:textColorHint="@color/white"
-            android:textStyle="bold"
-            android:inputType="textEmailAddress"
-            android:autofillHints="emailAddress"
-            android:layout_marginBottom="16dp"
-            android:padding="12dp"/>
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:autofillHints="password"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp" />
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:autofillHints="password"
-            android:textColorHint="@color/white"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp"/>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btinicio"
+        android:textSize="19sp"
+        android:textColor="@android:color/white" />
+</LinearLayout>
 
-        <Button
-                android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btinicio"
-            android:textSize="19sp"
-            android:textColor="@android:color/white"/>
-    </LinearLayout>

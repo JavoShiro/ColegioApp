@@ -2,37 +2,37 @@ package com.example.appcolegio
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-
+import com.example.appcolegio.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btnClass1: Button
-    private lateinit var btnClass2: Button
-    private lateinit var btnClass3: Button
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnClass1 = findViewById(R.id.btclass1)
-        btnClass2 = findViewById(R.id.btclass2)
-        btnClass3 = findViewById(R.id.btclass3)
+        // Botón para el rol Profesor
+        binding.btclass1.setOnClickListener {
+            navigateToLogin("Profesor")
+        }
 
-        btnClass1.setOnClickListener {
-            navigateToLogin()
+        // Botón para el rol Alumno
+        binding.btclass2.setOnClickListener {
+            navigateToLogin("Alumno")
         }
-        btnClass2.setOnClickListener {
-            navigateToLogin()
-        }
-        btnClass3.setOnClickListener {
-            navigateToLogin()
+
+        // Botón para el rol Apoderado
+        binding.btclass3.setOnClickListener {
+            navigateToLogin("Apoderado")
         }
     }
 
-    private fun navigateToLogin() {
-            val intent = Intent(this, LoginActivity::class.java)
+    private fun navigateToLogin(role: String) {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("ROL_SELECCIONADO", role)
         startActivity(intent)
     }
 }

@@ -3,48 +3,72 @@ package com.example.appcolegio
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.appcolegio.databinding.AppnotaBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class NotaActivity : AppCompatActivity() {
 
-    private lateinit var btnRegistrarNota: Button
-    private lateinit var btnEliminarNota: Button
-    private lateinit var btnEditarNota: Button
-    private lateinit var llNotas: LinearLayout
-
-    private val nombres = listOf("Felipe López", "Daniela Castro", "Juan Ramos")
-    private val notas = mutableMapOf<String, MutableList<Double>>()
+    private lateinit var binding: AppnotaBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.appnota)
 
-        btnRegistrarNota = findViewById(R.id.btnRegistrarNota)
-        btnEliminarNota = findViewById(R.id.btnEliminarNota)
-        btnEditarNota = findViewById(R.id.btnEditar)
-        llNotas = findViewById(R.id.llNotas)
+        // Inicializa el binding
+        binding = AppnotaBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnRegistrarNota.setOnClickListener {
+        auth = FirebaseAuth.getInstance()
+
+        // Cargar la información de los alumnos (simulado o basado en el tipo de usuario)
+        cargarAlumnos()
+
+        // Configura los listeners para los botones
+        binding.btnRegistrarNota.setOnClickListener {
             mostrarDialogoSeleccionarNombre("Agregar")
         }
 
-        btnEliminarNota.setOnClickListener {
+        binding.btnEliminarNota.setOnClickListener {
             mostrarDialogoSeleccionarNombre("Eliminar")
         }
 
-        btnEditarNota.setOnClickListener {
+        binding.btnEditar.setOnClickListener {
             mostrarDialogoSeleccionarNombre("Editar")
         }
     }
 
+    private fun cargarAlumnos() {
+        // Simula la carga de alumnos basado en el correo electrónico del usuario actual
+        val user = auth.currentUser
+        if (user != null) {
+            val correo = user.email
+            if (correo != null) {
+                if (correo.contains(".prof@colegio.com")) {
+                    // Cargar lista de alumnos solo si el usuario es profesor
+                    mostrarNotas()
+                } else {
+                    mostrarMensaje("No tienes acceso para administrar notas")
+                }
+            }
+        }
+    }
+
     private fun mostrarDialogoSeleccionarNombre(accion: String) {
+        // Aquí ya no utilizamos Firestore, simplemente mostramos un nombre fijo de ejemplo
+        val nombres = listOf("Juan Pérez", "Ana Gómez", "Carlos Sánchez") // Lista de ejemplo
+
+        if (nombres.isEmpty()) {
+            mostrarMensaje("No hay alumnos registrados.")
+            return
+        }
+
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Seleccionar Persona")
-        builder.setItems(nombres.toTypedArray()) { dialog: DialogInterface, which: Int ->
+        builder.setItems(nombres.toTypedArray()) { _, which ->
             val nombreSeleccionado = nombres[which]
             when (accion) {
                 "Agregar" -> mostrarDialogoIngresarNota(nombreSeleccionado)
@@ -61,10 +85,10 @@ class NotaActivity : AppCompatActivity() {
         builder.setTitle("Ingresar Nota para $nombre")
         val input = EditText(this)
         builder.setView(input)
-        builder.setPositiveButton("Guardar") { dialog, which ->
+        builder.setPositiveButton("Guardar") { _, _ ->
             val nota = input.text.toString().toDoubleOrNull()
             if (nota != null && nota in 1.0..7.0) {
-                agregarNota(nombre, nota)
+                mostrarMensaje("Nota de $nombre agregada con éxito.")
             } else {
                 mostrarMensaje("La nota debe estar entre 1.0 y 7.0")
             }
@@ -74,10 +98,17 @@ class NotaActivity : AppCompatActivity() {
     }
 
     private fun mostrarDialogoSeleccionarNota(nombre: String) {
-        val notasDePersona = notas[nombre] ?: return mostrarMensaje("No hay notas para $nombre")
+        // Simulamos que el alumno tiene algunas notas predefinidas
+        val notasDePersona = listOf(5.5, 6.0, 4.0) // Ejemplo de notas
+
+        if (notasDePersona.isEmpty()) {
+            mostrarMensaje("No hay notas para $nombre")
+            return
+        }
+
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Seleccionar Nota a Eliminar para $nombre")
-        builder.setItems(notasDePersona.map { it.toString() }.toTypedArray()) { dialog, which ->
+        builder.setItems(notasDePersona.map { it.toString() }.toTypedArray()) { _, which ->
             val notaAEliminar = notasDePersona[which]
             eliminarNota(nombre, notaAEliminar)
         }
@@ -86,10 +117,17 @@ class NotaActivity : AppCompatActivity() {
     }
 
     private fun mostrarDialogoSeleccionarNotaParaEditar(nombre: String) {
-        val notasDePersona = notas[nombre] ?: return mostrarMensaje("No hay notas para $nombre")
+        // Simulamos que el alumno tiene algunas notas predefinidas
+        val notasDePersona = listOf(5.5, 6.0, 4.0) // Ejemplo de notas
+
+        if (notasDePersona.isEmpty()) {
+            mostrarMensaje("No hay notas para $nombre")
+            return
+        }
+
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Seleccionar Nota a Editar para $nombre")
-        builder.setItems(notasDePersona.map { it.toString() }.toTypedArray()) { dialog, which ->
+        builder.setItems(notasDePersona.map { it.toString() }.toTypedArray()) { _, which ->
             val notaActual = notasDePersona[which]
             mostrarDialogoEditarNota(nombre, notaActual)
         }
@@ -103,10 +141,10 @@ class NotaActivity : AppCompatActivity() {
         val input = EditText(this)
         input.setText(notaActual.toString())
         builder.setView(input)
-        builder.setPositiveButton("Guardar") { dialog, which ->
+        builder.setPositiveButton("Guardar") { _, _ ->
             val nuevaNota = input.text.toString().toDoubleOrNull()
             if (nuevaNota != null && nuevaNota in 1.0..7.0) {
-                editarNota(nombre, notaActual, nuevaNota)
+                mostrarMensaje("Nota de $nombre editada con éxito.")
             } else {
                 mostrarMensaje("La nota debe estar entre 1.0 y 7.0")
             }
@@ -115,43 +153,25 @@ class NotaActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun agregarNota(nombre: String, nota: Double) {
-        if (!notas.containsKey(nombre)) {
-            notas[nombre] = mutableListOf()
-        }
-        notas[nombre]?.add(nota)
-        mostrarNotas()
-    }
-
     private fun eliminarNota(nombre: String, nota: Double) {
-        notas[nombre]?.remove(nota)
-        mostrarNotas()
-        mostrarMensaje("Se eliminó con éxito la nota $nota para $nombre")
-    }
-
-    private fun editarNota(nombre: String, notaActual: Double, nuevaNota: Double) {
-        val listaNotas = notas[nombre]
-        val indiceNota = listaNotas?.indexOf(notaActual)
-        if (indiceNota != null && indiceNota != -1) {
-            listaNotas[indiceNota] = nuevaNota
-            mostrarNotas()
-            mostrarMensaje("Se editó con éxito la nota de $notaActual a $nuevaNota para $nombre")
-        }
+        // Lógica para eliminar nota (simulada)
+        mostrarMensaje("Nota de $nombre eliminada con éxito.")
     }
 
     private fun mostrarNotas() {
-        llNotas.removeAllViews()
+        // Simulamos mostrar notas de los alumnos
+        val nombres = listOf("Juan Pérez", "Ana Gómez", "Carlos Sánchez") // Ejemplo de alumnos
+        binding.llNotas.removeAllViews()
         for (nombre in nombres) {
             val textoNota = TextView(this)
-            val notasDePersona = notas[nombre]?.joinToString(", ") ?: "Sin notas"
-            textoNota.text = "$nombre: $notasDePersona"
+            textoNota.text = "$nombre: 5.5, 6.0, 4.0" // Ejemplo de notas
             textoNota.setPadding(8, 8, 8, 8)
             textoNota.setBackgroundResource(android.R.color.white)
             textoNota.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            llNotas.addView(textoNota)
+            binding.llNotas.addView(textoNota)
         }
     }
 
@@ -162,4 +182,3 @@ class NotaActivity : AppCompatActivity() {
         builder.show()
     }
 }
-

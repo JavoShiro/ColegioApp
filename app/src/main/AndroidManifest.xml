@@ -32,15 +32,15 @@
             android:name=".HomeActivity"
             android:exported="true" />
 
-        <!-- Actividad para notas -->
+        <!-- Actividad de notas -->
         <activity
             android:name=".NotaActivity"
             android:exported="true" />
 
-        <!-- Actividad para agenda -->
+        <!-- Actividad para agregar alumno -->
         <activity
-            android:name=".AgendaActivity"
-            android:exported="true" /> <!-- Asegúrate de que esta línea esté incluida -->
+            android:name=".AgregarAlumnoActivity"
+            android:exported="true" />
 
     </application>
 

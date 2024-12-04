@@ -11,6 +11,7 @@
     android:background="@drawable/imgblack"
     tools:context=".MainActivity">
 
+    <!-- Texto de bienvenida -->
     <TextView
         android:id="@+id/textWelcome"
         android:layout_width="wrap_content"
@@ -22,13 +23,14 @@
         android:textAlignment="center"
         android:layout_marginBottom="24dp" />
 
+    <!-- Botones de selección de rol -->
     <Button
         android:id="@+id/btclass1"
         android:layout_width="169dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:textSize="19sp"
-        android:text="@string/btalumno" />
+        android:text="@string/btprofessor" />
 
     <Button
         android:id="@+id/btclass2"
@@ -36,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:textSize="19sp"
-        android:text="@string/btprofessor" />
+        android:text="@string/btalumno" />
 
     <Button
         android:id="@+id/btclass3"
@@ -46,6 +48,7 @@
         android:textSize="19sp"
         android:text="@string/btapoderado" />
 
+    <!-- Espaciador opcional -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +56,7 @@
         android:textSize="20sp"
         android:gravity="center" />
 
+    <!-- Texto de copyright -->
     <TextView
         android:id="@+id/textCopyright"
         android:layout_width="match_parent"
